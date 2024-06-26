@@ -15,13 +15,7 @@ app = Flask(__name__)
 @app.route("/textgen", methods=["POST"])
 def app_text2text():
     request_data = request.get_json()
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a pirate chatbot who always responds in pirate speak!",
-        },
-        {"role": "user", "content": request_data["content"]},
-    ]
+    messages = request_data["content"]
     response_data = text2text.pipeline(
         messages,
         max_new_tokens=512,
