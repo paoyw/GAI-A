@@ -40,7 +40,6 @@ def textgen():
         temperature=0.6,
         top_p=0.9
     )
-    print(response_data)
     return json.dumps(response_data)
 
 if __name__ == '__main__':
