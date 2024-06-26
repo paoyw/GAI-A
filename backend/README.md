@@ -21,3 +21,11 @@ curl \
     -d '{"content": "Draw a cat in the Van Gogh style."}' \
     -X POST "http://127.0.0.1:5000/imggen"
 ```
+
+- text-to-speech generation.
+```bash
+curl \
+    -H 'Content-Type: application/json' \
+    -d '{"content": "Tell me a story about a cat in the boots.", "embed_idx": 0}' \
+    -X POST "http://127.0.0.1:5000/speechgen"
+```

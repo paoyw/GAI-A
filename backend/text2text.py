@@ -12,7 +12,7 @@ pipeline = transformers.pipeline(
 
 terminators = [
     pipeline.tokenizer.eos_token_id,
-    pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")
+    pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>"),
 ]
 
-print("The textgen model is ready.")
+print("The text-to-text model is ready.")
