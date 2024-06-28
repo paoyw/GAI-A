@@ -26,12 +26,21 @@ app.post('/api/model1', (req, res) => {
   res.json({ output: model1Output });
 });
 
-app.post('/api/model2', upload.single('image'), (req, res) => {
-  const model1Output = req.body.texts;
-  const productImage = req.file;
-  // Call Model2 API
-  const model2Output = [/* simulated output */ 'image1', 'image2', 'image3'];
-  res.json({ output: model2Output });
+// API route to handle multiple file uploads
+app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name: 'image_1', maxCount: 1 }, { name: 'image_2', maxCount: 1 }]), (req, res) => {
+  if (req.files) {
+    console.log('Files uploaded:', req.files);
+    // Process the uploaded files as needed
+    // Here you would typically call your AI model processing function
+
+    // Example response
+    res.json({
+      message: 'Files successfully uploaded',
+      files: req.files
+    });
+  } else {
+    res.status(400).json({ message: 'No files uploaded' });
+  }
 });
 
 app.post('/api/model3', (req, res) => {
@@ -44,3 +53,4 @@ app.post('/api/model3', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
