@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -26,21 +27,27 @@ app.post('/api/model1', (req, res) => {
   res.json({ output: model1Output });
 });
 
-// API route to handle multiple file uploads
-app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name: 'image_1', maxCount: 1 }, { name: 'image_2', maxCount: 1 }]), (req, res) => {
-  if (req.files) {
-    console.log('Files uploaded:', req.files);
-    // Process the uploaded files as needed
-    // Here you would typically call your AI model processing function
 
-    // Example response
-    res.json({
-      message: 'Files successfully uploaded',
-      files: req.files
-    });
-  } else {
-    res.status(400).json({ message: 'No files uploaded' });
-  }
+// API route to handle multiple file uploads
+// Mock API for model 2
+app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name: 'image_1', maxCount: 1 }, { name: 'image_2', maxCount: 1 }]), (req, res) => {
+  // Log uploaded files
+  console.log('Uploaded files:', req.files);
+
+  // Read sample images from disk
+  const sampleImages = [
+    path.join(__dirname, 'sample_images/sample_image1.png'),
+    path.join(__dirname, 'sample_images/sample_image2.png'),
+    path.join(__dirname, 'sample_images/sample_image3.png')
+  ];
+
+  const imageBuffers = sampleImages.map(filePath => fs.readFileSync(filePath));
+
+  // Send images as response
+  res.json({
+    message: 'Mock response from model 2',
+    images: imageBuffers.map(buffer => buffer.toString('base64'))
+  });
 });
 
 app.post('/api/model3', (req, res) => {
