@@ -40,7 +40,6 @@ function dragFile(event) {
   
       if (file) {
         reader.readAsDataURL(file);
-        target.value = null;
       }
     });
   }
