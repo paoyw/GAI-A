@@ -1,3 +1,15 @@
+# python
 __pycache__/
 *.py[cod]
 *$py.class
+
+# node js
+node_modules/
+package-lock.json
+
+# web server
+uploads/
+
+# mac os
+.DS_Store
+
