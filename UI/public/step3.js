@@ -1,12 +1,34 @@
-
-async function callModel3() {
-    const model2Output = document.getElementById('model2-output').innerText;
-    const response = await fetch('/api/model3', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ images: model2Output })
+function callModel3() {
+    const images = document.querySelectorAll('.image-wrapper img');
+    const formData = new FormData();
+  
+    images.forEach((image, index) => {
+      const blob = dataURLtoBlob(image.src);
+      formData.append('images', blob, `image${index}.jpg`);
     });
-    const data = await response.json();
-    document.getElementById('model3-output').innerText = JSON.stringify(data.output);
-}
+  
+    fetch('/api/model3', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        const videoUrl = URL.createObjectURL(blob);
+        displayVideo(videoUrl);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+  
+  // Function to display the resulting video
+  function displayVideo(videoUrl) {
+    const videoContainer = document.getElementById('video-container');
+    videoContainer.innerHTML = `
+      <video controls>
+        <source src="${videoUrl}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    `;
+  }
   

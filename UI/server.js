@@ -50,11 +50,20 @@ app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name:
   });
 });
 
-app.post('/api/model3', (req, res) => {
-  const model2Output = req.body.images;
-  // Call Model3 API
-  const model3Output = [/* simulated output */ 'video1.mp4', 'video2.mp4'];
-  res.json({ output: model3Output });
+app.post('/api/model3', upload.array('images'), (req, res) => {
+  // Use the uploaded images (req.files)
+  console.log(req.files);
+  
+  const videoPath = path.join(__dirname, 'sample_video', 'sample_video.mp4');
+  fs.readFile(videoPath, (err, data) => {
+    if (err) {
+      res.status(500).send('Error reading video file');
+      console.log('Error reading video file');
+      return;
+    }
+    res.setHeader('Content-Type', 'video/mp4');
+    res.status(200).send(data);
+  });
 });
 
 app.listen(port, () => {
