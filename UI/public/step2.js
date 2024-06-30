@@ -11,31 +11,55 @@ function dragFile(event) {
     previewImages(files);
   }
   
+  function update_image_position(){
+    const previewList = document.getElementById('image-preview-list');
+    const wrappers = previewList.querySelectorAll('.preview-image-absolute-wrapper');
+    const n = wrappers.length;
+    wrappers.forEach((wrapper, index) => {
+      let mid = 0.25;
+      let range = 0.15;
+      let value = (n == 1) ? mid : range * 2 / (n-1) * index + mid - range;
+      let s = ( value * 100).toFixed(2) + '%';
+      wrapper.style.left =  s;
+      wrapper.style.top = s;
+      console.log(index, (0.3 / n) * (index - n / 2));
+    });
+  }
+
   // Function to handle multiple image previews
   function previewImages(files) {
     const previewList = document.getElementById('image-preview-list');
     Array.from(files).forEach(file => {
       const reader = new FileReader();
   
+      // <div id="image-preview-list">
+      //           <div class="preview-image-absolute-wrapper" style="left: 10%; top: 10%;">
+      //               <div class="preview-image-container"></div>
+
       reader.onload = function(e) {
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('preview-image-container');
-  
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.classList.add('preview-image');
-        img.dataset.file = file.name;  // Store the file name for later use
-  
-        const removeButton = document.createElement('span');
-        removeButton.classList.add('remove-icon');
-        removeButton.innerHTML = '&times;';
-        removeButton.onclick = function() {
-          imgContainer.remove();
-        };
-  
-        imgContainer.appendChild(img);
-        imgContainer.appendChild(removeButton);
-        previewList.appendChild(imgContainer);
+        const imgContainerWrapper = document.createElement('div');
+        imgContainerWrapper.classList.add('preview-image-absolute-wrapper');
+            const imgContainer = document.createElement('div');
+            imgContainer.classList.add('preview-image-container');
+    
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('preview-image');
+            img.dataset.file = file.name;  // Store the file name for later use
+      
+            const removeButton = document.createElement('span');
+            removeButton.classList.add('remove-icon');
+            removeButton.innerHTML = '&times;';
+            removeButton.onclick = function() {
+              imgContainerWrapper.remove();
+              update_image_position();
+            };
+    
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(removeButton);
+          imgContainerWrapper.appendChild(imgContainer);
+          previewList.appendChild(imgContainerWrapper);
+          update_image_position();
       };
   
       if (file) {

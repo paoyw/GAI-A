@@ -5,42 +5,88 @@
 
 .sentence-block {
   position: relative;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f8f9fa;
+  height: 7vh;
   display: flex;
-  align-items: center;
+  margin-bottom: 3vh;
 }
 
 .sentence-index {
-  margin-right: 10px;
   font-weight: bold;
-}
-
-.sentence-block .content {
-  flex: 1;
-  margin-bottom: 5px;
-  padding: 5px;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  background-color: #e9f5ff;
-  word-break: break-word;
-}
-
-.sentence-block .content[contenteditable="true"]:focus {
-  outline: none;
-  border-color: #0056b3;
-}
-
-.sentence-block .close-icon {
-  margin-left: 10px;
+  background-color:rgb(122, 116, 116);
+  height: 100%;
+  width: 2%;
+  border-radius: 3px;
+  align-items: center;
+  text-align: center;
   cursor: pointer;
-  color: #dc3545;
-  font-size: 16px;
+}
+
+.sentence-block .sentence-content {
+  border-radius: 3px;
+  width: 98%;
+  margin-left: 1%;
+  height: 100%;
+  background-color: rgb(236, 236, 236);
+}
+
+.sentence-content .content {
+  align-items: center;
+  text-align: left;
+  margin-left: 2%;
+  border-radius: 0px 3px 3px 0px;
+  width: 98%;
+  word-break: break-word;
+  line-height: 7vh;
+  font-size: 3vh;
+  font-family: "IBM Plex Mono", monospace;
+  color: rgb(32, 32, 32);
+}
+
+.sentence-content .content[contenteditable="true"]:focus {
+  outline: none;
+  border-color: #343a41;
+}
+
+#add-sentence-content[contenteditable="true"]:focus {
+  outline: none;
+  border-color: #343a41;
+}
+
+#add-sentence-content[contenteditable="true"]:focus + #add-sentence-content-guide{
+  display: none;
+}
+
+
+.sentence-content .close-icon {
+  right: 0;
+  position: absolute;
+  margin-right: 1.5%;
+  cursor: pointer;
+  color: #3f282a;
+  font-size: 7vh;
 }
 
 .sentence-block .close-icon:hover {
   color: #c82333;
+}
+
+
+#user-input{
+  width: 70%;
+  height: 10vh;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1.5vw;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: regular;
+  transition: all 0.5s;
+  resize: vertical;
+  padding: 3vh;
+}
+
+#user-input:focus{
+  height: 50vh;
 }

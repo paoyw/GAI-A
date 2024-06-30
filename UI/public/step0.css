@@ -1,0 +1,12 @@
+.h2-title {
+    /* background: linear-gradient(to left, #3a1c71, #d76d77, #ffaf7b);
+    background: -webkit-linear-gradient(to left, #3a1c71, #d76d77, #ffaf7b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 1px ivory; */
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 900;
+    /* color: transparent; */
+    color: white;
+ }
+ 
