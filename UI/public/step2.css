@@ -35,17 +35,19 @@
     max-width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
+    transition: all 0.3s;
   }
 
-  .preview-image:hover + .remove-icon{
+  .preview-image:hover + .delete-button{
     z-index: 10000;
   }
 
   .preview-image:hover{
     z-index: 10000;
+    transform: scale(1.05);
   }
   
-  .remove-icon {
+  /* .remove-icon {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -56,24 +58,25 @@
   
   .remove-icon:hover {
     color: #c82333;
-  }
+  } */
   
   input[type="file"] {
     display: none;
   }
   
   .custom-file-upload {
-    border: 5px dashed #2c2b2b;
+    border: 3px dashed #2c2b2b;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
-    border-radius: 5vw;
+    border-radius: 3vw;
     color: black;
     flex-basis: 4;
     flex-grow: 1;
     margin-right: 1vw;
     height: 50vh;
     width: 30vw;
+    background-color: rgba(182, 215, 255, 0.153);
   }
 
   /* #box {
@@ -106,7 +109,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
-  .delete-button {
+  /* .delete-button {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -117,8 +120,28 @@
     color: red;
     font-size: 18px;
     line-height: 1;
+  } */
+  
+
+  .delete-button {
+    right: 0;
+    position: absolute;
+    margin-right: 1.5%;
+    cursor: pointer;
+    color: #3f282a;
+    font-size: 5vh;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.25);
+    width: 3vh;
+    height: 3vh;
+    text-align: center;
+    line-height: 3vh;
   }
   
+  .delete-button:hover {
+    color: #c82333;
+  }
+
   .image-wrapper:active {
     cursor: grabbing;
   }

@@ -96,7 +96,8 @@ h2 {
 }
 
 .step {
-  padding: 5vh 7.5vw 20vh 7.5vw;
+  padding: 10vh 7.5vw 10vh 7.5vw;
+  min-height: 80vh;
   background-color: var(--dark-color-1);
 }
 

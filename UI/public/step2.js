@@ -16,7 +16,7 @@ function dragFile(event) {
     const wrappers = previewList.querySelectorAll('.preview-image-absolute-wrapper');
     const n = wrappers.length;
     wrappers.forEach((wrapper, index) => {
-      let mid = 0.25;
+      let mid = 0.22;
       let range = 0.15;
       let value = (n == 1) ? mid : range * 2 / (n-1) * index + mid - range;
       let s = ( value * 100).toFixed(2) + '%';
@@ -48,7 +48,7 @@ function dragFile(event) {
             img.dataset.file = file.name;  // Store the file name for later use
       
             const removeButton = document.createElement('span');
-            removeButton.classList.add('remove-icon');
+            removeButton.classList.add('delete-button');
             removeButton.innerHTML = '&times;';
             removeButton.onclick = function() {
               imgContainerWrapper.remove();
