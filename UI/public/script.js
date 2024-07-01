@@ -1,41 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
   loadSteps();
-  // Initialize SortableJS
-  const steps = document.querySelectorAll('.step');
-  const sidebarLinks = document.querySelectorAll('.sidebar a');
-
+  
   // Add event listener for sidebar links
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
   sidebarLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
+      console.log(e.target.getAttribute('href'));
       const stepId = e.target.getAttribute('href').slice(1); // Remove '#'
-      focusStep(stepId);
+      document.getElementById(stepId).scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
-
+  
   // Add scroll event listener to apply 'inactive' class dynamically
+  const steps   = document.getElementsByClassName('step');
   window.addEventListener('scroll', () => {
-    steps.forEach(step => {
+    console.log(steps);
+    let matched = 0;
+    for (let step of steps){
+      console.log("step-");
       const stepTop = step.getBoundingClientRect().top;
-      if (stepTop >= 0 && stepTop <= window.innerHeight * 0.5) {
+      const stepBottom = step.getBoundingClientRect().bottom;
+      console.log(stepTop, stepBottom, (window.innerHeight))
+      if (stepTop <= (window.innerHeight / 2) && (window.innerHeight / 2) <= stepBottom){
+      // if (stepTop >= 0 && stepTop <= window.innerHeight * 0.5 && matched != 1) {
+        document.getElementById("tag-" + step.id).classList.add('active-tag');
         step.classList.remove('inactive');
+        console.log("tag-" + step.id);
+        matched = 1;
+        // focus on stepX
       } else {
+        document.getElementById("tag-" + step.id).classList.remove('active-tag');
+        console.log("remove: tag-" + step.id);
         step.classList.add('inactive');
       }
-    });
+    };
   });
-
-  // Function to focus on a specific step
-  function focusStep(stepId) {
-    steps.forEach(step => {
-      if (step.id === stepId) {
-        step.classList.remove('inactive');
-        document.getElementById(stepId).scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        step.classList.add('inactive');
-      }
-    });
-  }
 });
 
 async function loadSteps() {

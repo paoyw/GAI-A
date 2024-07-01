@@ -1,18 +1,39 @@
-<div id="step2" class="step" style="background-color: pink;">
-    <h2>Step 2: Upload Images</h2>
-    
-    <!-- <input type="file" id="product-images" accept="image/*" multiple onchange="previewImages(event)"> -->
-    <!-- <div >Drop here</div> -->
-    <!-- <div id="box" ondrop="previewImages(event)" ondragover="allowDrop(event)"> -->
-    <label id="box" ondrop="dragFile(event)" ondragover="allowDrop(event)" for="file-upload" class="custom-file-upload">
-        Custom Upload
-        </label>
-    <input id="file-upload" type="file" accept="image/*" multiple onchange="clickFile(event)"/>
-    <!-- </div> -->
-    <div id="image-preview-container">
-      <div id="image-preview-list" class="scroll-container"></div>
+<div id="step2" class="step" style="
+background: rgb(240,142,56);
+background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66%, rgba(255,207,29,1) 100%);
+">
+    <div style="padding-bottom: 5vh;">
+      <h2 style="color: rgb(34, 34, 34);">Second, upload your images for your product.</h2>
     </div>
-    <button onclick="callModel2()">Submit</button>
+    
+
+
+    <div style="
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+    ">
+        
+        <div id="box" class="custom-file-upload"
+            ondrop="dragFile(event)"
+            ondragover="allowDrop(event)"
+             style="
+            background-image: url('./upload_image.png') ;  background-repeat: no-repeat; background-position: center; background-size: 60%; ">
+            <div id="image-preview-list">
+            </div>
+            Drag here or <label for="file-upload">Click Me</label>
+            <input id="file-upload" type="file" accept="image/*" multiple onchange="clickFile(event)"/>
+        </div>
+        <div class="custom-file-upload">
+            display text!        
+        </div>
+        <div style="flex-basis: 1;">
+            <button onclick="callModel2()" style="width: 5vw; height: 5vw; background-color: rgb(146, 119, 70);">✨</button>
+        </div>
+    </div>  
+    <!-- <div id="image-preview-list" class="scroll-container"></div>     -->
+    
     <div id="output-container" class="output-container"></div>
 
 </div>

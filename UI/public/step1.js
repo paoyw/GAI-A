@@ -1,27 +1,38 @@
   // Function to handle adding a sentence block with an index
 function addSentenceBlock(sentence, index) {
+  // <li class="sentence-block">
+  //     <span class="sentence-index" style="background-color:gray;"></span>
+  //     <div class="sentence-content">
+  //       <span class="content" >text2</span>
+  //       <span class="close-icon">×</span>
+  //     </div>
+  //   </li>
   const listItem = document.createElement('li');
   listItem.classList.add('sentence-block');
   
-  const indexSpan = document.createElement('span');
-  indexSpan.classList.add('sentence-index');
-  indexSpan.textContent = index + 1;
-  listItem.appendChild(indexSpan);
+    const indexSpan = document.createElement('span');
+    indexSpan.classList.add('sentence-index');
+    // indexSpan.textContent = index + 1;
+    listItem.appendChild(indexSpan);
 
-  const content = document.createElement('div');
-  content.classList.add('content');
-  content.contentEditable = true;
-  content.textContent = sentence;
-  listItem.appendChild(content);
+    const sentence_content = document.createElement('div');
+    sentence_content.classList.add('sentence-content');
+    listItem.appendChild(sentence_content);
 
-  const closeButton = document.createElement('span');
-  closeButton.classList.add('close-icon');
-  closeButton.innerHTML = '&times;';
-  closeButton.onclick = function() {
-    listItem.remove();
-    updateIndices();
-  };
-  listItem.appendChild(closeButton);
+      const content = document.createElement('span');
+      content.classList.add('content');
+      content.contentEditable = true;
+      content.textContent = sentence;
+      sentence_content.appendChild(content);
+
+      const closeButton = document.createElement('span');
+      closeButton.classList.add('close-icon');
+      closeButton.innerHTML = '&times;';
+      closeButton.onclick = function() {
+        listItem.remove();
+        updateIndices();
+      };
+      sentence_content.appendChild(closeButton);
 
   document.getElementById('sentences-container').appendChild(listItem);
 }
@@ -30,13 +41,13 @@ function addSentenceBlock(sentence, index) {
 function updateIndices() {
   const blocks = document.querySelectorAll('.sentence-block .sentence-index');
   blocks.forEach((block, index) => {
-    block.textContent = index + 1;
+    // block.textContent = index + 1;
   });
 }
 
 // Function to add a new sentence manually
 function addNewSentence() {
-  const newSentence = document.getElementById('add-sentence-content').textContent;
+  const newSentence = document.getElementById('add-sentence-content').value;
   if (newSentence) {
     const index = document.querySelectorAll('.sentence-block').length - 1;
     addSentenceBlock(newSentence, index);
@@ -68,3 +79,4 @@ async function callModel1() {
   document.getElementById('add-sentence').style.display = "flex";
   document.getElementById('add-sentence-button').addEventListener('click', addNewSentence);
 }
+
