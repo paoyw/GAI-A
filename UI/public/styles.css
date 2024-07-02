@@ -123,23 +123,21 @@ input[type="file"] {
 }
 
 button {
-  /* margin-top: 20px;
-  padding: 15px; */
-  background-color: var(--bright-color-3);
-  /* color: rgb(40, 34, 34); */
-  color: rgb(232, 212, 155);
-  border: none;
-  border-radius: 4px;
   font-size: 2vw;
   font-family: "IBM Plex Mono", monospace;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border: none;
+  
+  /* transition: background-color 0.3s;
+  background-color: var(--bright-color-3);
+  color: rgb(232, 212, 155);*/
+  border-radius: 4px;
 }
 
-button:hover {
+/* button:hover {
   background-color: var(--bright-color-2);
   color: rgb(232, 212, 155);
-}
+} */
 
 .output {
   margin-top: 20px;
