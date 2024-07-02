@@ -44,14 +44,19 @@ h2 {
 
 /* ============================================= */
 .sidebar {
+  display: flex;
   position: fixed;
-  left: 0;
+  right: 0;
+
   width: 20vw;
-  height: 30vh;
-  margin-top: 4.5vw;
-  margin-left: 2vw;
+  height: 20vh;
+  padding: 2vh;
   vertical-align: middle;
   /* background-color: #007bff; */
+
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
 }
 
 .sidebar div {
