@@ -194,7 +194,7 @@ if __name__== "__main__":
     
     import sys
     sys.path.insert(1, os.path.join(sys.path[0], '..', '..'))
-    from utils.save_video import tensor_to_mp4
+    from backend.Dynamicrafter.utils.save_video import tensor_to_mp4
     for i, batch in tqdm(enumerate(dataloader), desc="Data Batch"):
         video = batch['video']
         name = batch['path'][0].split('videos/')[-1].replace('/','_')
