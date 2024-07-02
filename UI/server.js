@@ -3,9 +3,17 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 
 const app = express();
 const port = 3000;
+
+const isTesting = true;
+
+// Configures for the text-to-text model.
+const model1Hostname = "127.0.0.1";
+const model1Port = 5000;
+const model1Path = "/textgen";
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -22,9 +30,62 @@ app.use(express.static('public'));
 
 app.post('/api/model1', (req, res) => {
   const userInput = req.body.text;
+  let model1Output = [];
   // Call Model1 API
-  const model1Output = [/* simulated output */ 'text1', 'text2', 'text3'];
-  res.json({ output: model1Output });
+  if (isTesting) {
+    model1Output = [/* simulated output */ 'text1', 'text2', 'text3'];
+    res.json({ output: model1Output });
+  }
+  else {
+    const postData = JSON.stringify({
+      content: [
+        {
+          role: "system", content: "You are an advertisement video creater." +
+            " Please follow the instructions and create the description." +
+            " The description will be the input of the text-to-image generation model for" +
+            "each key frame of the video." +
+            " The text-length for each description should less than 15 words."+
+            " The reply should be in json format ONLY." +
+            " SAMPLE format is [{'id': 0, 'description': '...'}]." +
+            " The product name should be replaced with <TOKEN>."
+        },
+        { role: "user", content: userInput },
+      ],
+    });
+
+    const options = {
+      hostname: model1Hostname,
+      port: model1Port,
+      path: model1Path,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(postData),
+      },
+    };
+
+    const modelReq = http.request(options, (modelRes) => {
+      console.log(`STATUS: ${res.statusCode}`);
+      console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+
+      modelRes.on('data', (chunk) => {
+        console.log(`BODY: ${chunk.toString()}`);
+        responseData = JSON.parse(chunk.toString());
+        generatedContent = JSON.parse(responseData[0]["generated_text"][2]["content"]);
+        generatedContent.forEach(e => {
+          model1Output.push(e["description"]);
+        });
+        res.json({ output: model1Output });
+      });
+    });
+
+    modelReq.on('error', (error) => {
+      console.error(error);
+    });
+    
+    modelReq.write(postData);
+    modelReq.end();
+  }
 });
 
 
@@ -53,7 +114,7 @@ app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name:
 app.post('/api/model3', upload.array('images'), (req, res) => {
   // Use the uploaded images (req.files)
   console.log(req.files);
-  
+
   const videoPath = path.join(__dirname, 'sample_video', 'sample_video.mp4');
   fs.readFile(videoPath, (err, data) => {
     if (err) {
