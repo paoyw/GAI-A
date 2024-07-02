@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Add scroll event listener to apply 'inactive' class dynamically
-  const steps   = document.getElementsByClassName('step');
+  const steps = document.getElementsByClassName('step');
   window.addEventListener('scroll', () => {
     console.log(steps);
     let matched = 0;
@@ -24,11 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(stepTop, stepBottom, (window.innerHeight))
       if (stepTop <= (window.innerHeight / 2) && (window.innerHeight / 2) <= stepBottom){
       // if (stepTop >= 0 && stepTop <= window.innerHeight * 0.5 && matched != 1) {
+        // focus on stepX
         document.getElementById("tag-" + step.id).classList.add('active-tag');
         step.classList.remove('inactive');
         console.log("tag-" + step.id);
         matched = 1;
-        // focus on stepX
+        if (step.id == "step2"){
+          const step1_outputs = document.getElementById("sentences-container");
+          document.getElementById("step2-text").innerHTML = "";
+          for (const child of step1_outputs.children) {
+            const clone = child.cloneNode(true);
+            clone.querySelector(".sentence-content").querySelector(".content").setAttribute("contenteditable", "false");
+            document.getElementById("step2-text").appendChild(clone);
+            // console.log(child.tagName);
+          }
+        }
+
       } else {
         document.getElementById("tag-" + step.id).classList.remove('active-tag');
         console.log("remove: tag-" + step.id);
