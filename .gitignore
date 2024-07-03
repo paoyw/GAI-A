@@ -13,3 +13,5 @@ uploads/
 # mac os
 .DS_Store
 
+# backend cache
+backend/cache/

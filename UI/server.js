@@ -47,7 +47,7 @@ app.post('/api/model1', (req, res) => {
             " The text-length for each description should less than 15 words."+
             " The reply should be in json format ONLY." +
             " SAMPLE format is [{'id': 0, 'description': '...'}]." +
-            " The product name should be replaced with <TOKEN>."
+            " The product name should be replaced with <PRODUCT>."
         },
         { role: "user", content: userInput },
       ],
