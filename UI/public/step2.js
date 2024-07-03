@@ -82,9 +82,16 @@ async function callModel2() {
     images.forEach((img, index) => {
         const dataURL = img.src;
         const blob = dataURLtoBlob(dataURL);
-        formData.append(`image_${index}`, blob, `image_${index}.png`);
+        formData.append(`images`, blob, `image_${index}.png`);
     });
 
+    const step2_texts = document.getElementById("step2-text");
+    for (const child of step2_texts.children) {
+        console.log(child.querySelector(".sentence-content").querySelector(".content").innerHTML);
+        formData.append("texts", child.querySelector(".sentence-content").querySelector(".content").innerHTML);
+        console.log(formData.getAll("texts"))
+    }
+    
     try {
         const response = await fetch('/api/model2', {
             method: 'POST',
@@ -111,11 +118,12 @@ function displayImages(images) {
     outputContainer.innerHTML = '';
     outputContainer.style.padding = "1vh";
     outputContainer.style.height = "50vh";
+
+    const step2_texts = document.getElementById("step2-text");
     images.forEach((base64Image, index) => {
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-wrapper');
         imgWrapper.dataset.index = index;
-
         const controlDiv = document.createElement('div');
         controlDiv.classList.add('control-div');
 
@@ -136,7 +144,7 @@ function displayImages(images) {
         const imgElement = document.createElement('img');
         imgElement.src = `data:image/jpeg;base64,${base64Image}`;
         imgElement.classList.add('output-image');
-
+        imgElement.dataset.text = step2_texts.children[index].querySelector(".sentence-content").querySelector(".content").innerHTML;
         imgWrapper.appendChild(controlDiv);
         imgWrapper.appendChild(imgElement);
         outputContainer.appendChild(imgWrapper);

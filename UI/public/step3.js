@@ -6,6 +6,7 @@ function callModel3() {
   images.forEach((image, index) => {
       const blob = dataURLtoBlob(image.src);
       formData.append('images', blob, `image${index}.jpg`);
+      formData.append('texts', image.dataset.text);
   });
 
   fetch('/api/model3', {

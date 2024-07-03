@@ -28,11 +28,11 @@ app.post('/api/model1', (req, res) => {
 });
 
 
-// API route to handle multiple file uploads
-// Mock API for model 2
-app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name: 'image_1', maxCount: 1 }, { name: 'image_2', maxCount: 1 }]), (req, res) => {
-  // Log uploaded files
+// API route to handle multiple file uploads and texts
+app.post('/api/model2', upload.array('images'), (req, res) => {
+  // Log uploaded files and texts
   console.log('Uploaded files:', req.files);
+  console.log('Received texts:', req.body.texts);
 
   // Read sample images from disk
   const sampleImages = [
@@ -53,6 +53,7 @@ app.post('/api/model2', upload.fields([{ name: 'image_0', maxCount: 1 }, { name:
 app.post('/api/model3', upload.array('images'), (req, res) => {
   // Use the uploaded images (req.files)
   console.log(req.files);
+  console.log(req.body.texts);
   
   const videoPath = path.join(__dirname, 'sample_video', 'sample_video.mp4');
   fs.readFile(videoPath, (err, data) => {
