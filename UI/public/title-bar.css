@@ -1,0 +1,32 @@
+.glue-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.glue-header-logo {
+  margin-right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.glue-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.glue-list-item {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.glue-list-item:last-child {
+  margin-right: 0;
+}

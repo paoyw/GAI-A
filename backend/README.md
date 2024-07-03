@@ -18,10 +18,11 @@ curl \
 - text-to-image generation.
 ```bash
 curl \
-    -H 'Content-Type: application/json' \
-    -d '{"content": "Draw a cat in the Van Gogh style."}' \
-    -X POST "http://127.0.0.1:5000/imggen" \
-    -o image.jpg
+    -X POST \
+    -F "train=@[path to finetune image]" \
+    -F "[prompt]=@/dev/null" \
+    "http://127.0.0.1:5000/imggen" \
+    -o archive.zip
 ```
 
 - text-to-speech generation.
@@ -31,4 +32,12 @@ curl \
     -d '{"content": "The big brown fox jumps over the lazy dog.", "embed_idx": 0}' \
     -X POST "http://127.0.0.1:5000/speechgen" \
     -o speech.wav
+```
+
+- image-to-video generation.
+```bash
+curl \
+    -F "[prompt]=[path to the key frame]" \
+    "http://127.0.0.1:5000/videogen" \
+    -o video.mp4
 ```
