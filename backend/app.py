@@ -4,6 +4,7 @@ import json
 from flask import Flask, request, send_file
 import torch
 import soundfile as sf
+from PIL import Image
 
 import text2text
 import text2img
@@ -54,6 +55,17 @@ def app_text2speech():
     sf.write(speech_io, speech["audio"], speech["sampling_rate"], format="WAV")
     speech_io.seek(0)
     return send_file(speech_io, mimetype="audio/WAV")
+
+
+@app.route("/videogen", methods=["POST"])
+def app_img2video():
+    text_img_pair = []
+    for k, v in request.files.items():
+        print(k, v)
+        print(type(v))
+        Image.open(v)
+    return ""
+    # return send_file(video, mimetype="video/mp4")
 
 
 if __name__ == "__main__":
