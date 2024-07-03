@@ -1,32 +1,17 @@
-import argparse
-import logging
 import math
 import os
-import random
 import glob
-import shutil
-from pathlib import Path
-import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.utils.checkpoint
-import transformers
 from PIL import Image
 from torchvision import transforms
 from torchvision.utils import save_image
 from tqdm.auto import tqdm
-from peft import LoraConfig
-from peft.utils import get_peft_model_state_dict
-from transformers import AutoProcessor, AutoModel, CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import StableDiffusionXLPipeline, AutoencoderKL, DDPMScheduler, DiffusionPipeline, StableDiffusionPipeline, UNet2DConditionModel, AutoPipelineForText2Image
+from diffusers import DDPMScheduler, AutoPipelineForText2Image
 from diffusers.optimization import get_scheduler
-from diffusers.utils import convert_state_dict_to_diffusers
 from diffusers.training_utils import compute_snr
-from diffusers.utils.torch_utils import is_compiled_module
-from deepface import DeepFace
-import cv2
 import argparse
 
 from PIL import Image
