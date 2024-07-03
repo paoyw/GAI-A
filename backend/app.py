@@ -64,7 +64,7 @@ def app_text2img():
         inference_image.save(f"cache/img/{i}.jpg")
         df["prompt"].append(prompt)
         df["filename"].append(os.path.join("img", f"{i}.jpg"))
-    pd.DataFrame(df).to_csv("cache/img/img.csv")
+    pd.DataFrame(df).to_csv("cache/img/img.csv", index=False)
 
     shutil.make_archive("cache/archive", "zip", "cache/img/")
     return send_file("cache/archive.zip", mimetype="application/zip")
