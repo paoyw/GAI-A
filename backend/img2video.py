@@ -24,7 +24,8 @@ def inference_by_imgs(
     imgs:List[Image],
     descriptions:List[str],
     audio_prompt:str='energetic EDM',
-    args:Args=args
+    args:Args=args,
+    save_path='testout_aud.mp4',
 ):
     # load images
     videos = [img2video(img) for img in imgs]
@@ -82,6 +83,6 @@ def inference_by_imgs(
         sample_rate=aud_model.sample_rate,
         stem_name='testout')
     
-    torchvision.io.write_video('testout_aud.mp4', video, fps=8, video_codec='h264', options={'crf': '10'},
+    torchvision.io.write_video(save_path, video, fps=8, video_codec='h264', options={'crf': '10'},
                            audio_array=norm_wav, audio_fps=aud_model.sample_rate, audio_codec='aac')
     

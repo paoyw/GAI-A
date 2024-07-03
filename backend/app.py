@@ -98,14 +98,15 @@ def app_img2video():
     for k, v in request.files.items():
         descriptions.append(k)
         imgs.append(Image.open(v).convert("RGB"))
+    
+    os.makedirs("cache/", exist_ok=True)
     img2video.inference_by_imgs(
         imgs=imgs,
         descriptions=descriptions,
+        save_path="cache/video.mp4",
     )
-
     torch.cuda.empty_cache()
-    return ""
-    # return send_file(video, mimetype="video/mp4")
+    return send_file("cache/video.mp4", mimetype="video/mp4")
 
 
 if __name__ == "__main__":
