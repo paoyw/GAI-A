@@ -10,12 +10,12 @@ from tqdm import tqdm
 from audiocraft.models import MusicGen
 from audiocraft.data.audio_utils import normalize_audio
 
-from backend.Dynamicrafter.videopipeline import Args, load_model_checkpoint, image_guided_synthesis, img2video
-from backend.Dynamicrafter.utils.utils import instantiate_from_config
+from Dynamicrafter.videopipeline import Args, load_model_checkpoint, image_guided_synthesis, img2video
+from Dynamicrafter.utils.utils import instantiate_from_config
 
 args = Args(
     ckpt_path='/tmp2/DynamiCrafter_checkpoints/dynamicrafter_256_v1/model.ckpt',
-    config='./backend/Dynamicrafter/configs/inference_256_v1.0.yaml',
+    config='./Dynamicrafter/configs/inference_256_v1.0.yaml',
 )
 
 
