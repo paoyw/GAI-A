@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 
 @app.route("/textgen", methods=["POST"])
+@torch.no_grad()
 def app_text2text():
     import text2text
 
@@ -26,6 +27,8 @@ def app_text2text():
         temperature=0.6,
         top_p=0.9,
     )
+    del text2text.pipeline
+    del text2text
     torch.cuda.empty_cache()
 
     return json.dumps(response_data)
@@ -88,11 +91,19 @@ def app_text2speech():
 
 @app.route("/videogen", methods=["POST"])
 def app_img2video():
-    text_img_pair = []
+    import img2video
+
+    imgs = []
+    descriptions = []
     for k, v in request.files.items():
-        print(k, v)
-        print(type(v))
-        Image.open(v)
+        descriptions.append(k)
+        imgs.append(Image.open(v).convert("RGB"))
+    img2video.inference_by_imgs(
+        imgs=imgs,
+        descriptions=descriptions,
+    )
+
+    torch.cuda.empty_cache()
     return ""
     # return send_file(video, mimetype="video/mp4")
 
