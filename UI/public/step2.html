@@ -3,10 +3,8 @@ background: rgb(240,142,56);
 background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66%, rgba(255,207,29,1) 100%);
 ">
     <div style="padding-bottom: 5vh;">
-      <h2 style="color: rgb(34, 34, 34);">Second, upload your images for your product.</h2>
+      <h2 style="color: rgb(34, 34, 34);">Second, upload some images of your product.</h2>
     </div>
-    
-
 
     <div style="
       display: flex;
@@ -14,26 +12,58 @@ background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66
       align-items: flex-start;
       justify-content: flex-start;
     ">
-        
-        <div id="box" class="custom-file-upload"
-            ondrop="dragFile(event)"
-            ondragover="allowDrop(event)"
-             style="
-            background-image: url('./upload_image.png') ;  background-repeat: no-repeat; background-position: center; background-size: 60%; ">
-            <div id="image-preview-list">
+        <div class="two-column-block" >
+            <div style="
+                display:block;
+                margin: 1vh;
+                padding: 1vh;
+                font-size: 5vh;
+                font-weight: 900;
+                font-family: 'Sulphur Point', sans-serif;
+                color: rgb(43, 43, 43);
+            "> Images of your product </div>
+            <div id="box" class="custom-file-upload"
+                ondrop="dragFile(event)"
+                ondragover="allowDrop(event)"
+                style="
+                background-image: url('./upload_image.png') ;  background-repeat: no-repeat; background-position: center; background-size: 60%; ">
+                <div id="image-preview-list">
+                </div>
+                Drag here or <label for="file-upload">Click Me</label>
+                <input id="file-upload" type="file" accept="image/*" multiple onchange="clickFile(event)"/>
             </div>
-            Drag here or <label for="file-upload">Click Me</label>
-            <input id="file-upload" type="file" accept="image/*" multiple onchange="clickFile(event)"/>
         </div>
-        <div class="custom-file-upload">
-            display text!        
+        <div class="two-column-block" >
+            <div style="
+                display:block;
+                margin: 1vh;
+                padding: 1vh;
+                font-size: 5vh;
+                font-weight: 900;
+                font-family: 'Sulphur Point', sans-serif;
+                color: rgb(43, 43, 43);
+            "> Texts from step1</div>
+            <div style="border-style: none;
+                        cursor: not-allowed;
+                        border-radius: 1vw;
+                        flex-basis: 9;
+                        flex-grow: 1; 
+                        background-color: rgba(182, 215, 255, 0.153);
+                        text-align: center;
+                        font-size: 3vh;
+            " id="step2-text">
+                Texts
+            </div>
         </div>
-        <div style="flex-basis: 1;">
-            <button onclick="callModel2()" style="width: 5vw; height: 5vw; background-color: rgb(146, 119, 70);">✨</button>
+        <div style="flex-basis: 1; align-self: end;">
+            <button onclick="callModel2()" style="border-radius: 1vh 1vh 0vh 0vh; width: 5vw; height: 5vw; background-color: #ff8d2f;">✨</button>
         </div>
     </div>  
     <!-- <div id="image-preview-list" class="scroll-container"></div>     -->
     
     <div id="output-container" class="output-container"></div>
-
+    <!-- <div class="image-wrapper" draggable="true" data-index="0">
+            <img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAIYAAAB/CAYAAAAq5LpAAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAIagAwAEAAAAAQAAAH8AAAAA1uQZ8AAAAAlwSFlzAAALEwAACxMBAJqcGAAAAsJJREFUeAHt3D2LE1EUBuBVtNLWQkHBxs7W2sLGX2Njo7CtpVj5DxR7wUqwt7QTBLe0EARBVPDrHfDAnFmyEkmTuc+Fw50zk4Q9T95N0iQHBxYBAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBsQROjTXuxmmv5cq91JXUj9Tr1GHKGlTgbOa+n/qW+j2rnzm2BhW4kbnfpOaBqGPBGDAU5zPzo9T05FcQlrtgDBaM25n36IRAVEAEY5BgXMicTzYE4nPOP11cE4yArH3dzIAfU/VqMN+f5fyl1PR5Y35eMAKy9vUiA86f9On4berWbHDBmGFMh6cX/Rrb6cNmra85OExdT72sk/bjAmeOn1rdmQ9/J3qe/U7q/eomNNB/CZzLvS7+457eShZAI7xifMnMU1lbCIzwGWMLDjctAcEoCXsTEIzGoSkBwSgJexMQjMahKQHBKAl7ExCMxqEpAcEoCXsTEIzGoSkBwSgJexMQjMahKQHBKAl7ExCMxqEpAcEoCXsTEIzGoSkBwSgJexMQjMahKQHBKAl7ExCMxqEpAcEoCXsTEIzGoSkBwSgJexMQjMahKYERvldyOcPeTU2/nrNpXV1cmP5hHi/Ozdt3aR7OTzjeP4EH+ZOXX2reRb8M0/7JnPAXj/BWMv9S8wkUW136lVt/3+oee3bjEYLxKs/J9Et8u1xHebBPu3xAj0WAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECAAIE1CfwBIQtsKGDZtksAAAAASUVORK5CYII=" class="output-image">
+            <span class="delete-button">×</span>
+        </div> -->
 </div>

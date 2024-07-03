@@ -1,3 +1,18 @@
+.two-column-block{
+    display: inline-flex;
+    flex-direction: column;
+    padding-right: 1vh;
+    padding-bottom: 1vh;
+    color: black;
+    flex-basis: 4;
+    flex-grow: 1;
+    /* margin-right: 1vw; */
+    height: 60vh;
+    width: 30vw;
+    text-align: center;
+}
+
+/* image preview */
 #image-preview-container {
     margin-top: 10px;
     overflow-x: auto;
@@ -5,30 +20,31 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
-  }
-  
-  #image-preview-list {
+}
+    
+#image-preview-list {
     display: inline-block;
     position: relative;
-    height: 100%;
+    height: 80%;
     width: 100%;
-  }
-  .preview-image-absolute-wrapper {
+}
+
+.preview-image-absolute-wrapper {
     position: absolute;
     transition: all 0.3s;
     display: block;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .preview-image-container {
+    height: 30%;
+    width: 30%;
+}
+
+.preview-image-container {
     position: relative;
     margin-right: 10px;
-    height: 50%;
-    width: 50%;
-  }
-  
-  .preview-image {
+    height: 100%;
+    width: 100%;
+}
+
+.preview-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -36,129 +52,160 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: all 0.3s;
-  }
+}
 
-  .preview-image:hover + .delete-button{
+.preview-image:hover + .delete-button{
     z-index: 10000;
-  }
+}
 
-  .preview-image:hover{
+.preview-image:hover{
     z-index: 10000;
     transform: scale(1.05);
-  }
-  
-  /* .remove-icon {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    color: #dc3545;
-    font-size: 16px;
-  }
-  
-  .remove-icon:hover {
-    color: #c82333;
-  } */
-  
-  input[type="file"] {
+}
+
+input[type="file"] {
     display: none;
-  }
-  
-  .custom-file-upload {
+}
+
+.custom-file-upload {
     border: 3px dashed #2c2b2b;
     display: inline-block;
-    padding: 6px 12px;
+    /* padding: 6px 12px; */
     cursor: pointer;
-    border-radius: 3vw;
+    border-radius: 1vw;
     color: black;
-    flex-basis: 4;
-    flex-grow: 1;
-    margin-right: 1vw;
-    height: 50vh;
-    width: 30vw;
+    flex-basis: 9;
+    flex-grow: 1; 
+    /* margin-right: 1vw; */
     background-color: rgba(182, 215, 255, 0.153);
-  }
+    text-align: center;
+    font-size: 3vh;
+}
 
-  /* #box {
+.custom-file-upload label{
+    cursor: pointer;
+    background-color: rgb(189, 215, 215);
+    border-radius: 1vh;
+    width: 14vh;
+    display: inline-block;
+    height: 4.5vh;
+    line-height: 4.5vh;
+}
 
-  }
-  */
-  .output-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+.custom-file-upload label:hover{
+    cursor: pointer;
+    background-color: rgb(62, 97, 97);
+    color: ivory;
+}
+
+/* step2 Text */
+#step2-text .sentence-block .sentence-content .content{
+    font-size: 2vw;
+}
+
+#step2-text .sentence-block .sentence-content {
+    text-align: left;
+    width: 100%;
+}
+
+#step2-text .sentence-block{
+    margin: 1vh;
+}
+
+#step2-text .sentence-block .sentence-index{
+    display: none;
+}
+
+#step2-text .sentence-block .sentence-content .close-icon{
+    display: none;
+}
+
+/* output container */
+.output-container {
     overflow-x: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1vh solid #ff8d2f;
+    background-color: rgba(204, 212, 146, 0.2);
+    border-radius: 3vh 0vh 3vh 3vh;
     transition: all 0.3s ease;
-  }
-  
-  .image-wrapper {
-    position: relative;
-    cursor: grab;
-    transition: all 0.3s ease; 
-    /* , opacity 0.3s ease; */
-    user-select: none;
-  }
-  
-  .output-image {
-    max-width: 200px;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* .delete-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    padding: 5px;
-    cursor: pointer;
-    color: red;
-    font-size: 18px;
-    line-height: 1;
-  } */
-  
+    justify-content: center;
+    align-items: start;
+    padding: 0; /* 1vh */
+    height: 0; /* 50vh */
+    display: flex;
+    transition: height 0.3s;
+}
 
-  .delete-button {
+.drag-handle:active {
+    cursor: grabbing;
+    display: inline-block;
+    width: 80%;
+}
+
+.image-wrapper {
+    display: inline-flex;
+    position: relative;
+    margin: 1vh;
+    margin-top: 2vh;
+    transition: all 0.3s; 
+    user-select: none;
+    width: 20vw;
+    flex-direction: column;
+}
+
+.output-image {
+    display: flex;
+    max-width: 100%;
+    border-radius: 0.5vh;
+    box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.2);
+}
+
+.control-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.7vh;
+    width: 100%;
+    height: 3vh;
+    /* box-sizing: border-box; */
+}
+
+.drag-handle {
+    display: inline-block;
+    flex-grow: 1;
+    margin-right: 0.5vh;
+    height: 3vh;
+    cursor: move;
+    background-color: rgb(79, 75, 75);
+    border-radius: 0.5vh;
+    /* padding: 1vh; */
+}
+
+/* delete button */
+.delete-button {
     right: 0;
-    position: absolute;
-    margin-right: 1.5%;
     cursor: pointer;
-    color: #3f282a;
-    font-size: 5vh;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.25);
     width: 3vh;
     height: 3vh;
     text-align: center;
     line-height: 3vh;
-  }
-  
-  .delete-button:hover {
-    color: #c82333;
-  }
+}
 
-  .image-wrapper:active {
-    cursor: grabbing;
-  }
-  
-  .image-wrapper.dragging {
-    opacity: 0.7;
-    transform: scale(1.05);
-  }
+.control-div .delete-button {
+    background-color: #811920;
+    color: #811920;
+    border-radius: 0.5vh;
+    font-size: 5vh;
+}
 
-  .image-wrapper.leftmove {
-    opacity: 0.7;
-    left: -100px;
-    background-color: blue;
-  }
-  .image-wrapper.rightmove {
-    opacity: 0.7;
-    left: -100px;
-    background-color: red;
-  }
-  
+.preview-image-container .delete-button {
+    color: #3f282a;
+    font-size: 5vh;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.25);
+    position: absolute;
+}
+
+.delete-button:hover {
+    background-color: #bd0010;
+    color: #ffffff;
+}
