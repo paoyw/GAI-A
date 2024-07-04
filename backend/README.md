@@ -20,7 +20,7 @@ curl \
 curl \
     -X POST \
     -F "train=@[path to finetune image]" \
-    -F "[prompt]=@/dev/null" \
+    -F "prompt=[prompt content]" \
     "http://127.0.0.1:5000/imggen" \
     -o archive.zip
 ```

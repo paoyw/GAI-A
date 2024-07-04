@@ -38,11 +38,9 @@ def app_text2text():
 def app_text2img():
     import text2img
 
-    prompts = list(k for k, v in request.files.items() if "null" == v.filename)
+    prompts = list(v for k, v in request.form.items() if k == "prompt")
     train_images = list(
-        Image.open(v).convert("RGB")
-        for k, v in request.files.items()
-        if "null" != v.filename
+        Image.open(v).convert("RGB") for k, v in request.files.items() if k == "train"
     )
 
     inference_images, inference_prompts = text2img.text2image(
@@ -63,7 +61,7 @@ def app_text2img():
     ):
         inference_image.save(f"cache/img/{i}.jpg")
         df["prompt"].append(prompt)
-        df["filename"].append(os.path.join("img", f"{i}.jpg"))
+        df["filename"].append(f"{i}.jpg")
     pd.DataFrame(df).to_csv("cache/img/img.csv", index=False)
 
     shutil.make_archive("cache/archive", "zip", "cache/img/")
@@ -98,7 +96,7 @@ def app_img2video():
     for k, v in request.files.items():
         descriptions.append(k)
         imgs.append(Image.open(v).convert("RGB"))
-    
+
     os.makedirs("cache/", exist_ok=True)
     img2video.inference_by_imgs(
         imgs=imgs,
