@@ -10,7 +10,7 @@ function addSentenceBlock(sentence, index) {
   const listItem = document.createElement('li');
   listItem.classList.add('sentence-block');
   
-    const indexSpan = document.createElement('span');
+    const indexSpan = document.createElement('div');
     indexSpan.classList.add('sentence-index');
     // indexSpan.textContent = index + 1;
     listItem.appendChild(indexSpan);

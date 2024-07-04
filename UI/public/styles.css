@@ -16,6 +16,10 @@ body, h1, h2, p, textarea, input, button {
   box-sizing: border-box;
 }
 
+textarea:focus{
+  outline:none;
+}
+
 p {
   font-size: 1.5vw;
   font-weight: 100;
@@ -46,6 +50,7 @@ h2 {
 .sidebar {
   display: flex;
   position: fixed;
+  top: 4vw;
   right: 0;
 
   width: 20vw;
@@ -57,6 +62,7 @@ h2 {
   flex-direction: column;
   justify-content: end;
   align-items: end;
+  pointer-events: none;
 }
 
 .sidebar div {
@@ -74,6 +80,7 @@ h2 {
   transition: background-color 0.3s ease, opacity 0.3s;
   border-radius: 4vh;
   transition: all 0.2s;
+  pointer-events: auto;
 }
 
 .sidebar div:hover {
