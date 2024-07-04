@@ -22,6 +22,9 @@ const model1Path = "/textgen";
 const model2Hostname = "127.0.0.1";
 const model2Port = 5000;
 const model2Path = "/imggen";
+const model3Hostname = "127.0.0.1";
+const model3Port = 5000;
+const model3Path = "/videogen";
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -124,7 +127,9 @@ app.post('/api/model2', upload.array('images'), (req, res) => {
       form.append("prompt", req.body.texts);
     }
     else {
-      req.body.texts.forEach(e => form.append("prompt", e));
+      for (const i in req.body.texts) {
+        form.append(`prompt${i}`, req.body.texts[i]);
+      }
     }
 
     for (const i in req.files) {
@@ -139,7 +144,7 @@ app.post('/api/model2', upload.array('images'), (req, res) => {
       headers: form.getHeaders(),
     };
 
-    const modelReq = http.request(options, async (modelRes) => {
+    const modelReq = http.request(options, (modelRes) => {
       console.log(`/imggen statusCode: ${modelRes.statusCode}`);
 
       const zipPath = path.join(__dirname, "cache/archive.zip");
@@ -175,19 +180,67 @@ app.post('/api/model2', upload.array('images'), (req, res) => {
 
 app.post('/api/model3', upload.array('images'), (req, res) => {
   // Use the uploaded images (req.files)
-  console.log(req.files);
-  console.log(req.body.texts);
+  console.log("model3", req.files);
+  console.log("model3", req.body.texts);
 
-  const videoPath = path.join(__dirname, 'sample_video', 'sample_video.mp4');
-  fs.readFile(videoPath, (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading video file');
-      console.log('Error reading video file');
-      return;
+  if (isTesting) {
+    const videoPath = path.join(__dirname, 'sample_video', 'sample_video.mp4');
+    fs.readFile(videoPath, (err, data) => {
+      if (err) {
+        res.status(500).send('Error reading video file');
+        console.log('Error reading video file');
+        return;
+      }
+      res.setHeader('Content-Type', 'video/mp4');
+      res.status(200).send(data);
+    });
+  }
+  else {
+    const form = new FormData();
+
+    var reqTexts = [];
+    if (typeof req.body.texts === "string") {
+      reqTexts = [req.body.texts];
     }
-    res.setHeader('Content-Type', 'video/mp4');
-    res.status(200).send(data);
-  });
+    else {
+      reqTexts = req.body.texts;
+    }
+
+    for (const i in req.files) {
+      form.append(reqTexts[i], fs.createReadStream(req.files[i].path));
+    }
+
+    const options = {
+      hostname: model3Hostname,
+      port: model3Port,
+      path: model3Path,
+      method: 'POST',
+      headers: form.getHeaders(),
+    };
+
+    const modelReq = http.request(options, (modelRes) => {
+      console.log(`/videogen statusCode: ${modelRes.statusCode}`);
+
+      const videoPath = path.join(__dirname, "cache/video.mp4");
+      const videoStream = fs.createWriteStream(videoPath);
+      modelRes.pipe(videoStream);
+
+      finished(videoStream, () => {
+        fs.readFile(videoPath, (err, data) => {
+          if (err) {
+            res.status(500).send('Error reading video file');
+            console.log('Error reading video file');
+            return;
+          }
+          res.setHeader('Content-Type', 'video/mp4');
+          res.status(200).send(data);
+        });
+      });
+    });
+    form.pipe(modelReq);
+  }
+
+
 });
 
 app.listen(port, () => {
