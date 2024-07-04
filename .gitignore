@@ -9,6 +9,7 @@ package-lock.json
 
 # web server
 uploads/
+UI/cache/*
 
 # mac os
 .DS_Store

@@ -20,7 +20,8 @@ curl \
 curl \
     -X POST \
     -F "train=@[path to finetune image]" \
-    -F "[prompt]=@/dev/null" \
+    -F "prompt1=[prompt content]" \
+    -F "prompt2=[prompt content]" \
     "http://127.0.0.1:5000/imggen" \
     -o archive.zip
 ```
@@ -28,16 +29,18 @@ curl \
 - text-to-speech generation.
 ```bash
 curl \
+    - X POST \
     -H 'Content-Type: application/json' \
     -d '{"content": "The big brown fox jumps over the lazy dog.", "embed_idx": 0}' \
-    -X POST "http://127.0.0.1:5000/speechgen" \
+    "http://127.0.0.1:5000/speechgen" \
     -o speech.wav
 ```
 
 - image-to-video generation.
 ```bash
 curl \
-    -F "[prompt]=[path to the key frame]" \
+    -X POST \
+    -F "[prompt]=@[path to the key frame]" \
     "http://127.0.0.1:5000/videogen" \
     -o video.mp4
 ```

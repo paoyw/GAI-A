@@ -36,15 +36,13 @@ def app_text2text():
 
 @app.route("/imggen", methods=["POST"])
 def app_text2img():
-    import text2img
-
-    prompts = list(k for k, v in request.files.items() if "null" == v.filename)
+    prompts = list(request.form.values())
     train_images = list(
-        Image.open(v).convert("RGB")
-        for k, v in request.files.items()
-        if "null" != v.filename
+        Image.open(v).convert("RGB") for k, v in request.files.items() if k == "train"
     )
+    print(prompts, train_images)
 
+    import text2img
     inference_images, inference_prompts = text2img.text2image(
         prompts=prompts,
         train_images=train_images,
@@ -58,12 +56,13 @@ def app_text2img():
     os.makedirs("cache/img/", exist_ok=True)
 
     df = {"prompt": [], "filename": []}
+    print(inference_images, inference_prompts, prompts)
     for i, (inference_image, prompt) in enumerate(
-        zip(inference_images, inference_prompts)
+        zip(inference_images, prompts)
     ):
         inference_image.save(f"cache/img/{i}.jpg")
         df["prompt"].append(prompt)
-        df["filename"].append(os.path.join("img", f"{i}.jpg"))
+        df["filename"].append(f"{i}.jpg")
     pd.DataFrame(df).to_csv("cache/img/img.csv", index=False)
 
     shutil.make_archive("cache/archive", "zip", "cache/img/")
@@ -91,15 +90,16 @@ def app_text2speech():
 
 @app.route("/videogen", methods=["POST"])
 def app_img2video():
-    import img2video
-
     imgs = []
     descriptions = []
     for k, v in request.files.items():
         descriptions.append(k)
         imgs.append(Image.open(v).convert("RGB"))
-    
+    print(imgs, descriptions)
+
     os.makedirs("cache/", exist_ok=True)
+    import img2video
+
     img2video.inference_by_imgs(
         imgs=imgs,
         descriptions=descriptions,
