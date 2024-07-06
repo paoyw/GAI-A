@@ -56,20 +56,26 @@ function addNewSentence() {
 
 // Function to call Model1 and handle response
 async function callModel1() {
+  
+  const loading = document.createElement('div');
+  loading.classList.add('donut');
+  document.getElementById('step1-output-block').appendChild(loading);
+  
   const userInput = document.getElementById('user-input').value;
   const response = await fetch('/api/model1', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: userInput })
   });
-  const data = await response.json();
-  
-  // Clear previous blocks
-  document.getElementById('sentences-container').innerHTML = '';
-
+  // await sleep(1000);
   function sleep(duration) {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
+  const data = await response.json();
+  // Clear previous blocks
+  document.getElementById('step1-output-block').removeChild(loading);
+  document.getElementById('sentences-container').innerHTML = '';
+  
   // Display each sentence as a block with an index
   let index = 0;
   for (sentence of data.output){

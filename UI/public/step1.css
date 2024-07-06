@@ -106,7 +106,14 @@
   height: 20vh;
 }
 
+/* #sentences-container {
+ text-align: left; 
+} */
+
 #step1-output-block{
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
   width: 70%;
   margin-top: 2vh;
   background-color: rgb(32, 47, 46, 0.4); /* var(--dark-color-3); */

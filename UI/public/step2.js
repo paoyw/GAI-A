@@ -73,6 +73,19 @@ function previewImages(files) {
 
 // Function to collect all images and submit them to the server
 async function callModel2() {
+    
+    const outputContainer = document.getElementById('output-container');
+    outputContainer.style.height = "40vh";
+    const loading = document.createElement('div');
+    loading.classList.add('donut');
+    document.getElementById('output-container').appendChild(loading);
+    // await sleep(1000);
+    function sleep(duration) {
+        return new Promise((resolve) => setTimeout(resolve, duration));
+    }
+    document.getElementById('output-container').removeChild(loading);
+
+    
     const formData = new FormData();
 
     // Get all images from the preview list
