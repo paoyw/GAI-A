@@ -13,7 +13,7 @@ const { finished } = require('stream');
 const app = express();
 const port = 3000;
 
-const isTesting = true;
+const isTesting = false;
 
 // Configures for the text-to-text model.
 const model1Hostname = "127.0.0.1";

@@ -58,6 +58,7 @@ def inference_by_imgs(
             batch_sampler = image_guided_synthesis(model, prompt, video, noise_shape, args.n_samples, args.ddim_steps, args.ddim_eta, \
                                 args.unconditional_guidance_scale, args.cfg_img, args.frame_stride, args.text_input, args.multiple_cond_cfg, args.loop, args.interp, args.timestep_spacing, args.guidance_rescale)
             frames.append(batch_sampler.squeeze().cpu())
+            torch.cuda.empty_cache()
 
     # list[tensor] -> tensor    
     video = torch.concat(frames, dim=1)
