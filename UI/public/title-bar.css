@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--dark-color-3);
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -12,7 +12,8 @@
 .glue-header-logo {
   margin-right: 20px;
   font-size: 2.5vw;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .glue-list {
@@ -24,10 +25,10 @@
 }
 
 .glue-list-item {
-  margin-right: 20px;
+  margin-left: 1vw;
   cursor: pointer;
 }
 
-.glue-list-item:last-child {
+/* .glue-list-item:last-child {
   margin-right: 0;
-}
+} */

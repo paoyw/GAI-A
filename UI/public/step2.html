@@ -1,9 +1,8 @@
 <div id="step2" class="step" style="
-background: rgb(240,142,56);
-background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66%, rgba(255,207,29,1) 100%);
+background: var(--bright-color-3); text-align: center;
 ">
     <div style="padding-bottom: 5vh;">
-      <h2 style="color: rgb(34, 34, 34);">Second, upload some images of your product.</h2>
+      <h2>Second, upload some images of your product.</h2>
     </div>
 
     <div style="
@@ -11,16 +10,13 @@ background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-start;
+      padding-bottom: 1vw;
     ">
         <div class="two-column-block" >
             <div style="
                 display:block;
                 margin: 1vh;
                 padding: 1vh;
-                font-size: 5vh;
-                font-weight: 900;
-                font-family: 'Sulphur Point', sans-serif;
-                color: rgb(43, 43, 43);
             "> Images of your product </div>
             <div id="box" class="custom-file-upload"
                 ondrop="dragFile(event)"
@@ -38,17 +34,13 @@ background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66
                 display:block;
                 margin: 1vh;
                 padding: 1vh;
-                font-size: 5vh;
-                font-weight: 900;
-                font-family: 'Sulphur Point', sans-serif;
-                color: rgb(43, 43, 43);
             "> Texts from step1</div>
             <div style="border-style: none;
                         cursor: not-allowed;
                         border-radius: 1vw;
                         flex-basis: 9;
                         flex-grow: 1; 
-                        background-color: rgba(182, 215, 255, 0.153);
+                        background-color: rgb(32, 47, 46, 0.4); /* var(--dark-color-3); */
                         text-align: center;
                         font-size: 3vh;
                         overflow-y: auto;
@@ -58,7 +50,10 @@ background: linear-gradient(90deg, rgba(240,142,56,1) 0%, rgba(255,197,143,1) 66
             </div>
         </div>
         <div style="flex-basis: 1; align-self: end;">
-            <button onclick="callModel2()" style="border-radius: 1vh 1vh 0vh 0vh; width: 5vw; height: 5vw; background-color: #ff8d2f;">✨</button>
+            <!-- <button onclick="callModel2()" style="border-radius: 1vh 1vh 0vh 0vh; width: 5vw; height: 5vw; background-color: #ff8d2f;">✨</button> -->
+            <button onclick="callModel2()" style="border-radius: 50%; width: 4vw; height: 4vw; margin-bottom: 1vh;">
+                <img src="./enter.png" style="max-height: 100%;">
+            </button>
         </div>
     </div>  
     <!-- <div id="image-preview-list" class="scroll-container"></div>     -->

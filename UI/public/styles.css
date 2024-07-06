@@ -1,9 +1,10 @@
 :root {
-  --bright-color-1:  rgb(217, 221, 233);
-  --bright-color-2:  rgba(114, 177, 216, 1);
-  --bright-color-3: rgba(46, 113, 140, 1);
-  --dark-color-1: rgb(33, 44, 52);
-  --dark-color-2: rgba(12, 12, 12, 1);
+  --bright-color-1:  rgb(224, 237, 236);
+  --bright-color-2:  rgb(177, 205, 205);
+  --bright-color-3: rgba(161, 200, 197, 1);
+  --dark-color-1: rgb(72, 123, 120);
+  --dark-color-2: rgba(48, 82, 80, 1);
+  --dark-color-3: rgb(32, 47, 46);
   /* Color Theme Swatches in RGBA */
 }
 
@@ -23,7 +24,7 @@ textarea:focus{
 p {
   font-size: 1.5vw;
   font-weight: 100;
-  color: rgb(216, 194, 194);
+  color: var(--dark-color-3);
 }
 
 body {
@@ -33,9 +34,11 @@ body {
 }
 
 h2 {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: "Roboto Condensed", sans-serif; */
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 100;
+  color: var(--dark-color-3);
   font-style: normal;
   font-size: 4vw;
 }
@@ -50,24 +53,22 @@ h2 {
 .sidebar {
   display: flex;
   position: fixed;
-  top: 4vw;
+  top: 5vw;
   right: 0;
 
   width: 20vw;
   height: 20vh;
   padding: 2vh;
-  vertical-align: middle;
   /* background-color: #007bff; */
 
   flex-direction: column;
-  justify-content: end;
+  justify-content: start;
   align-items: end;
   pointer-events: none;
 }
 
 .sidebar div {
   display: block;
-  margin: 0;
   padding: 0;
   width: 2vh;
   height: 2vh;
@@ -75,18 +76,21 @@ h2 {
   line-height: 4vh;
   text-align: left;
   color: rgba(0,0,0,0);
-  background-color: rgb(167, 194, 210);
+  background-color: var(--dark-color-2);
   /* border: 2px solid var(--bright-color-1); */
   transition: background-color 0.3s ease, opacity 0.3s;
   border-radius: 4vh;
   transition: all 0.2s;
   pointer-events: auto;
+  opacity: 0.9;
+  animation: expand 1s;
 }
 
 .sidebar div:hover {
   cursor: pointer;
-  /* border-color: var(--dark-color-1);
-  background-color: var(--bright-color-1);
+  background-color: var(--bright-color-3);
+  border-color: var(--dark-color-2);
+  /* background-color: var(--bright-color-1);
   opacity: 1; */
 }
 
@@ -95,7 +99,7 @@ h2 {
   width: 15vw !important;
   /* opacity: 0.9 !important; */
   color: var(--bright-color-1) !important;
-  background-color: var(--bright-color-3) !important;
+  background-color: var(--dark-color-2) !important;
   padding-left: 1vw !important;
 }
 
@@ -108,15 +112,15 @@ h2 {
 .step {
   padding: 10vh 7.5vw 10vh 7.5vw;
   min-height: 80vh;
-  background-color: var(--dark-color-1);
+  background-color: var(--bright-color-2);
 }
 
 /* Grayscale effect for inactive steps */
-.step.inactive {
-  filter: grayscale(0.9);
-  background-color: var(--dark-color-2);
+/* .step.inactive {
+  /* filter: grayscale(0.9); */
+  /* background-color: var(--dark-color-2); */
   /* pointer-events: none; Disable clicking on inactive steps */
-}
+
 
 input[type="file"] {
   width: calc(100% - 20px);
@@ -130,21 +134,20 @@ input[type="file"] {
 }
 
 button {
-  font-size: 2vw;
-  font-family: "IBM Plex Mono", monospace;
+  /* font-size: 2vw;
+  font-family: "IBM Plex Mono", monospace; */
   cursor: pointer;
-  border: none;
-  
-  /* transition: background-color 0.3s;
-  background-color: var(--bright-color-3);
-  color: rgb(232, 212, 155);*/
-  border-radius: 4px;
+  transition: background-color 0.3s;
+  border-radius: 5vh;
+  border: 0.3vh solid rgb(114, 114, 114) ;
+  background-color: rgb(79, 79, 93);
+  width: 5vh;
+  height: 5vh;
 }
 
-/* button:hover {
+button:hover {
   background-color: var(--bright-color-2);
-  color: rgb(232, 212, 155);
-} */
+}
 
 .output {
   margin-top: 20px;
@@ -153,4 +156,9 @@ button {
   border-radius: 4px;
   background-color: #e9f5ff;
   word-break: break-all;
+}
+
+@keyframes expand {
+  0% { margin-top: -2vw; }
+  100% { margin-top: 0vw; }
 }

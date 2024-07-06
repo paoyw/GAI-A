@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById("step2-text").innerHTML = "";
           for (const child of step1_outputs.children) {
             const clone = child.cloneNode(true);
+            clone.style.animation = "";
             clone.querySelector(".sentence-content").querySelector(".content").setAttribute("contenteditable", "false");
             document.getElementById("step2-text").appendChild(clone);
             // console.log(child.tagName);

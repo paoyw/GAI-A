@@ -27,7 +27,7 @@ function callModel3() {
 function displayVideo(videoUrl) {
   const videoContainer = document.getElementById('video-container');
   videoContainer.innerHTML = `
-      <video id="my-video" class="video-js vjs-default-skin" controls preload="auto">
+      <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" style="border-radius: 3vh; animation: scaleup 0.5s ease;">
           <source src="${videoUrl}" type="video/mp4">
           Your browser does not support the video tag.
       </video>
