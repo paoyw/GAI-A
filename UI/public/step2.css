@@ -100,16 +100,21 @@ input[type="file"] {
 
 /* step2 Text */
 #step2-text .sentence-block .sentence-content .content{
-    font-size: 2vw;
+    font-size: 1.5vw;
+    background: none;
+    line-height: 2.5vw;
+    width: 97%;
 }
 
 #step2-text .sentence-block .sentence-content {
-    text-align: left;
+    text-align: center;
     width: 100%;
 }
 
 #step2-text .sentence-block{
-    margin: 1vh;
+    margin: 0.5vh;
+    height: 2.5vw;
+    background: rgba(202, 202, 202, 0.613);
 }
 
 #step2-text .sentence-block .sentence-index{
@@ -122,7 +127,7 @@ input[type="file"] {
 
 /* output container */
 .output-container {
-    overflow-x: auto;
+    overflow-x: scroll;
     border: 1vh solid #ff8d2f;
     background-color: rgba(204, 212, 146, 0.2);
     border-radius: 3vh 0vh 3vh 3vh;
@@ -149,6 +154,7 @@ input[type="file"] {
     transition: all 0.3s; 
     user-select: none;
     width: 20vw;
+    flex-shrink: 0;
     flex-direction: column;
 }
 

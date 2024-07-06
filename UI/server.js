@@ -44,7 +44,24 @@ app.post('/api/model1', (req, res) => {
   let model1Output = [];
   // Call Model1 API
   if (isTesting) {
-    model1Output = [/* simulated output */ 'text1', 'text2', 'text3'];
+    model1Output = [
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+      'text1text1text1text1text1text1text1text1text1text1text1text1text1text1',
+    ];
     res.json({ output: model1Output });
   }
   else {
@@ -111,6 +128,19 @@ app.post('/api/model2', upload.array('images'), (req, res) => {
   if (isTesting) {
     sampleImages.push(path.join(__dirname, 'sample_images/sample_image1.png'));
     sampleImages.push(path.join(__dirname, 'sample_images/sample_image2.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image1.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image2.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image1.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image2.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image1.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image2.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image1.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image2.png'));
+    sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
     sampleImages.push(path.join(__dirname, 'sample_images/sample_image3.png'));
 
     const imageBuffers = sampleImages.map(filePath => fs.readFileSync(filePath));
