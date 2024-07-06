@@ -27,8 +27,6 @@ def app_text2text():
         temperature=0.6,
         top_p=0.9,
     )
-    del text2text.pipeline
-    del text2text
     torch.cuda.empty_cache()
 
     return json.dumps(response_data)
