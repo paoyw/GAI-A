@@ -1,6 +1,5 @@
 <div id="step1" class="step" style="
-  background: rgb(56,115,133);
-  background: linear-gradient(0deg, rgba(56,115,133,1) 0%, rgba(191,201,204,1) 39%, rgba(216,226,228,1) 100%);
+  background: var(--bright-color-2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +29,9 @@
     <div style="
       flex-basis: 1;
     ">
-      <button onclick="callModel1()" style="width: 5vh; height: 5vh;">✨</button>
+      <button onclick="callModel1()">
+        <img src="./enter.png" style="max-height: 100%;">
+      </button>
     </div>
   </div>
   <div id="step1-output-block">

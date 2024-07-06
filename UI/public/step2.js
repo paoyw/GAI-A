@@ -113,23 +113,31 @@ async function callModel2() {
     }
 }
 
-function displayImages(images) {
+async function displayImages(images) {
     const outputContainer = document.getElementById('output-container');
-    outputContainer.innerHTML = '';
-    outputContainer.style.padding = "1vh";
-    outputContainer.style.height = "50vh";
+    outputContainer.innerHTML = ''; // Clear existing images
+    outputContainer.style.height = "40vh";
 
     const step2_texts = document.getElementById("step2-text");
-    images.forEach((base64Image, index) => {
+    function sleep(duration) {
+        return new Promise((resolve) => setTimeout(resolve, duration));
+      }
+    let index = 0;
+    for (base64Image of images ){
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-wrapper');
         imgWrapper.dataset.index = index;
+
+        // Create control div
         const controlDiv = document.createElement('div');
         controlDiv.classList.add('control-div');
 
+        // Create drag handle
         const dragHandle = document.createElement('div');
         dragHandle.classList.add('drag-handle');
+        // dragHandle.innerHTML = ':::'; // Drag handle symbol
 
+        // Create delete button
         const deleteButton = document.createElement('span');
         deleteButton.innerHTML = '&times;';
         deleteButton.classList.add('delete-button');
@@ -138,22 +146,32 @@ function displayImages(images) {
             updateOrder();
         };
 
+        // Append drag handle and delete button to control div
         controlDiv.appendChild(dragHandle);
         controlDiv.appendChild(deleteButton);
 
+        // Create image element
         const imgElement = document.createElement('img');
         imgElement.src = `data:image/jpeg;base64,${base64Image}`;
         imgElement.classList.add('output-image');
-        imgElement.dataset.text = step2_texts.children[index].querySelector(".sentence-content").querySelector(".content").innerHTML;
+        console.log(index, step2_texts.children[index]?.querySelector(".sentence-content .content").innerHTML);
+        imgElement.dataset.text = step2_texts.children[index]?.querySelector(".sentence-content .content").innerHTML || '';
+
+        // Append control div and image to image wrapper
         imgWrapper.appendChild(controlDiv);
         imgWrapper.appendChild(imgElement);
+
+        // Append image wrapper to output container
         outputContainer.appendChild(imgWrapper);
-    });
+        // Create image wrapper
+        index += 1;
+        await sleep(100);
+    };
 
     // Initialize Sortable
     new Sortable(outputContainer, {
         animation: 150,
-        handle: '.drag-handle',
+        // handle: '.drag-handle',
         onEnd: updateOrder
     });
 
@@ -162,9 +180,8 @@ function displayImages(images) {
 
 function updateOrder() {
     const wrappers = document.querySelectorAll('.image-wrapper');
-    const n = wrappers.length;
     wrappers.forEach((wrapper, index) => {
         wrapper.dataset.index = index;
-        // wrapper.style.left = index / (n-1) * 70 + 10 + '%';
+
     });
 }
