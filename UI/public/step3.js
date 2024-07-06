@@ -5,11 +5,7 @@ async function callModel3() {
     const loading = document.createElement('div');
     loading.classList.add('donut');
     document.getElementById('video-container').appendChild(loading);
-    // await sleep(1000);
-    function sleep(duration) {
-        return new Promise((resolve) => setTimeout(resolve, duration));
-    }
-    document.getElementById('video-container').removeChild(loading);
+    
     
     const images = document.querySelectorAll('.image-wrapper img');
     const formData = new FormData();
@@ -26,6 +22,7 @@ async function callModel3() {
     })
     .then(response => response.blob())
     .then(blob => {
+        document.getElementById('video-container').removeChild(loading);
         const videoUrl = URL.createObjectURL(blob);
         displayVideo(videoUrl);
     })

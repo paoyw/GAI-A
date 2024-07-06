@@ -79,12 +79,6 @@ async function callModel2() {
     const loading = document.createElement('div');
     loading.classList.add('donut');
     document.getElementById('output-container').appendChild(loading);
-    // await sleep(1000);
-    function sleep(duration) {
-        return new Promise((resolve) => setTimeout(resolve, duration));
-    }
-    document.getElementById('output-container').removeChild(loading);
-
     
     const formData = new FormData();
 
@@ -110,7 +104,8 @@ async function callModel2() {
             method: 'POST',
             body: formData
         });
-
+        
+        document.getElementById('output-container').removeChild(loading);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

@@ -67,7 +67,7 @@ async function callModel1() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: userInput })
   });
-  // await sleep(1000);
+  
   function sleep(duration) {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
