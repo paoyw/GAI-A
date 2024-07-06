@@ -1,26 +1,37 @@
 // Function to call model 3
-function callModel3() {
-  const images = document.querySelectorAll('.image-wrapper img');
-  const formData = new FormData();
-
-  images.forEach((image, index) => {
-      const blob = dataURLtoBlob(image.src);
-      formData.append('images', blob, `image${index}.jpg`);
-      formData.append('texts', image.dataset.text);
-  });
-
-  fetch('/api/model3', {
-      method: 'POST',
-      body: formData,
-  })
-  .then(response => response.blob())
-  .then(blob => {
-      const videoUrl = URL.createObjectURL(blob);
-      displayVideo(videoUrl);
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+async function callModel3() {
+    
+    // const videoContainer = document.getElementById('video-container');
+    const loading = document.createElement('div');
+    loading.classList.add('donut');
+    document.getElementById('video-container').appendChild(loading);
+    // await sleep(1000);
+    function sleep(duration) {
+        return new Promise((resolve) => setTimeout(resolve, duration));
+    }
+    document.getElementById('video-container').removeChild(loading);
+    
+    const images = document.querySelectorAll('.image-wrapper img');
+    const formData = new FormData();
+    
+    images.forEach((image, index) => {
+        const blob = dataURLtoBlob(image.src);
+        formData.append('images', blob, `image${index}.jpg`);
+        formData.append('texts', image.dataset.text);
+    });
+    
+    fetch('/api/model3', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const videoUrl = URL.createObjectURL(blob);
+        displayVideo(videoUrl);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 // Function to display the resulting video using Video.js
