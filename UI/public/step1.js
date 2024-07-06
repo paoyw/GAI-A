@@ -52,6 +52,7 @@ function addNewSentence() {
     const index = document.querySelectorAll('.sentence-block').length - 1;
     addSentenceBlock(newSentence, index);
   }
+  document.getElementById('add-sentence-content').value = "";
 }
 
 // Function to call Model1 and handle response

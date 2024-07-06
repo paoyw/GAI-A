@@ -41,6 +41,7 @@ app.use(express.static('public'));
 
 app.post('/api/model1', (req, res) => {
   const userInput = req.body.text;
+  console.log(userInput);
   let model1Output = [];
   // Call Model1 API
   if (isTesting) {
@@ -99,7 +100,11 @@ app.post('/api/model1', (req, res) => {
       modelRes.on('data', (chunk) => {
         console.log(`BODY: ${chunk.toString()}`);
         responseData = JSON.parse(chunk.toString());
-        generatedContent = JSON.parse(responseData[0]["generated_text"][2]["content"]);
+        let assistantContent = responseData[0]["generated_text"][2]["content"];
+        const startIndex = assistantContent.indexOf("[");
+        const endIndex = assistantContent.lastIndexOf("]");
+        assistantContent = assistantContent.substring(startIndex, endIndex + 1);
+        generatedContent = JSON.parse(assistantContent);
         generatedContent.forEach(e => {
           model1Output.push(e["description"]);
         });
