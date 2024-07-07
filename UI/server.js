@@ -69,7 +69,7 @@ app.post('/api/model1', (req, res) => {
     const postData = JSON.stringify({
       content: [
         {
-          role: "system", content: "You are an advertisement video creater." +
+          role: "system", content: "You are an advertisement video creator." +
             " Please follow the instructions and create the description." +
             " The description will be the input of the text-to-image generation model for" +
             "each key frame of the video." +
