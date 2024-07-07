@@ -72,11 +72,11 @@ app.post('/api/model1', (req, res) => {
           role: "system", content: "You are an advertisement video creator." +
             " Please follow the instructions and create the description." +
             " The description will be the input of the text-to-image generation model for" +
-            "each key frame of the video." +
-            " The text-length for each description should less than 15 words." +
+            " each key frame of the video." +
+            " The text-length for each description should be less than 15 words." +
             " The reply should be in json format ONLY." +
             " SAMPLE format is [{'id': 0, 'description': '...'}]." +
-            " The product name should be replaced with <PRODUCT>."
+            " The product name should be appended with <PRODUCT>."
         },
         { role: "user", content: userInput },
       ],
